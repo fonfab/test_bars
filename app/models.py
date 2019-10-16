@@ -3,20 +3,9 @@ from app import models as mod
 # Create your models here.
 
 
-class Planet(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Название планеты')
-
-    class Meta:
-        verbose_name = 'Планета'
-        verbose_name_plural = 'Планеты'
-
-    def __str__(self):
-        return self.name
-
-
 class Recruit(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя рекрутера')
-    planet = models.ForeignKey(mod.Planet, null=True, on_delete=models.SET_NULL, verbose_name='Планета обитания')
+    planet = models.CharField(max_length=255, verbose_name='Планета обитания', default='null')
     age = models.IntegerField(verbose_name='Возраст')
     email = models.EmailField(verbose_name='Адресс электронной почты')
 
@@ -30,8 +19,7 @@ class Recruit(models.Model):
 
 class Sith(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя ситха')
-    planet = models.ForeignKey(mod.Planet, null=True, on_delete=models.SET_NULL,
-                               verbose_name='Планета на которой он обучает')
+    planet = models.CharField(max_length=255, verbose_name='Планета обитания', default='null')
     recruits = models.ManyToManyField(mod.Recruit, verbose_name='Список рекрутов')
 
     class Meta:

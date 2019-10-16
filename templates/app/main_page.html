@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "general/base.html" %}
+{% block title %} Первая страница {% endblock %}
+{% load static %}
+{% block content %}
+    <a href="" class="wrap">
+        <div class="button">
+            Для Ситхов
+        </div>
+    </a>
+    <a href="app/recruit_form" class="wrap">
+        <div class="button">
+            Для рекрутов
+        </div>
+    </a>
+{% endblock content %}
