@@ -8,6 +8,7 @@ class Recruit(models.Model):
     planet = models.CharField(max_length=255, verbose_name='Планета обитания', default='null')
     age = models.IntegerField(verbose_name='Возраст')
     email = models.EmailField(verbose_name='Адресс электронной почты')
+    is_shadow_hands = models.BooleanField(verbose_name='Рука тени', default=False)
 
     class Meta:
         verbose_name = 'Рекрут'
@@ -20,7 +21,6 @@ class Recruit(models.Model):
 class Sith(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя ситха')
     planet = models.CharField(max_length=255, verbose_name='Планета обитания', default='null')
-    recruits = models.ManyToManyField(mod.Recruit, verbose_name='Список рекрутов')
 
     class Meta:
         verbose_name = 'Ситх'
@@ -43,7 +43,7 @@ class Question(models.Model):
 
 
 class TestTrials(models.Model):
-    id_order = models.IntegerField(unique=True, verbose_name='Уникальный код ордена')
+    id_order = models.IntegerField(unique=True, primary_key=True, verbose_name='Уникальный код ордена')
     questions = models.ManyToManyField(mod.Question, verbose_name='Список вопросов')
 
     class Meta:
@@ -51,13 +51,13 @@ class TestTrials(models.Model):
         verbose_name_plural = 'Тесты'
 
     def __str__(self):
-        return self.id_orden
+        return self.id_order.__str__()
 
 
 class QuestionAsk(models.Model):
     recruit = models.ForeignKey(mod.Recruit, verbose_name='Рекрут', on_delete=models.SET_NULL, null=True)
     question = models.ForeignKey(mod.Question, verbose_name='Вопрос', on_delete=models.SET_NULL, null=True)
-    answer = models.BooleanField(verbose_name='Ответ рекрута', default=False)
+    answer = models.CharField(max_length=255, verbose_name='Ответ рекрута', default="")
 
     class Meta:
         verbose_name = 'Ответ на вопрос'
