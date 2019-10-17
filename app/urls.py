@@ -5,7 +5,7 @@ from app import views
 
 
 urlpatterns = [
-    url(r'recruit_form', views.get_recruit_form),
-    url(r'save_recruit_form', views.save_recruit_form),
+    url(r'recruit_form', views.get_recruit_form, name='recruit_form'),
+    url(r'recruit_test', views.get_recruit_test, name='recruit_test'),
 
 ]

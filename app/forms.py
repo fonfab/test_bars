@@ -4,7 +4,7 @@ from django import forms
 from app import models
 
 
-class Recruit(ModelForm):
+class Recruit(forms.ModelForm):
     class Meta:
         model = models.Recruit
         fields = ('name', 'planet', 'age', 'email')
@@ -35,7 +35,7 @@ class Recruit(ModelForm):
             super().__init__(*args, **kwargs)
 
         def clean(self):
-            name = self.cleaned_data.get('name')
-            planet = self.cleaned_data.get('planet')
-            age = self.cleaned_data.get('age')
-            email = self.cleaned_data.get('email')
+            self.name = self.cleaned_data.get('name', '')
+            self.planet = self.cleaned_data.get('planet', '')
+            self.age = self.cleaned_data.get('age', '')
+            self.email = self.cleaned_data.get('email', '')

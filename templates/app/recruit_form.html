@@ -2,7 +2,7 @@
 {% block title %} Первая страница {% endblock %}
 {% load static %}
 {% block content %}
-    <form action="save_recruit_form" method="post">
+    <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit" />

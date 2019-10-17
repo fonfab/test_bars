@@ -1,27 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from app import forms
+from app import models
 
 # Create your views here.
 
 
 def get_recruit_form(request):
-    context = {
-        'from': forms.Recruit
-    }
+    if request.method == 'POST':
+        form = forms.Recruit(request.POST)
+        if form.is_valid():
+            form.save()
 
-    return render(request, 'app/recruit_form.html', context)
+        return redirect('recruit_test')
+    else:
+        return render(request, 'app/recruit_form.html', {'form': forms.Recruit})
 
 
-def save_recruit_form(request):
+def get_recruit_test(request):
     print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print(request.body.decode('utf-8'))
     return render(request, 'app/main_page.html')
