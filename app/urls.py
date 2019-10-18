@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'sith_list', views.get_sith_list, name='sith_list'),
     url(r'list_recruit', views.get_recruit_list, name='list_recruit'),
     url(r'recruit', views.set_recruit, name='recruit'),
+    url(r'bonus', views.bonus, name='bonus'),
 ]

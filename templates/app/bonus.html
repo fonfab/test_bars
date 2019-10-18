@@ -4,8 +4,9 @@
 {% block content %}
     <h1>Список ситхов</h1>
     {% for item in list %}
-        <a href="/app/list_recruit?sith_id={{ item.id }}">
-            <div class="item sith_item item_hover">{{item.name}}</div>
-        </a>
+        <div class="item sith_item">{{item.sith.name}} --- {{ item.count }}</div>
     {% endfor %}
+    <a href="/app/bonus?mod={{ mode }}">
+        <div class="item sith_item item_hover">{{ message }}</div>
+    </a>
 {% endblock content %}>

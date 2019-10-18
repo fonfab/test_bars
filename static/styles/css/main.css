@@ -34,9 +34,8 @@ a{
     text-decoration: none;
     font-size: 16px;
     margin: 4px 2px;
-    cursor: pointer;
 }
-.sith_item:hover{
+.item_hover:hover{
     color: white;
     background-color: blue;
 }

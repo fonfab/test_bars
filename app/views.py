@@ -100,3 +100,23 @@ def send_info_email():
     msg = 'Поздравляю вас завербовали'
 
     send_mail(topic, msg, mail_from, mail_to)
+
+
+def bonus(request):
+    sith_list = [{'sith': item, 'count': len(models.Recruit.objects.filter(shadow_hands=item))}
+                 for item in models.Sith.objects.filter().all()]
+
+    if request.GET.get('mod', '') == '1':
+        sith_list = [item for item in sith_list if item['count'] != 0]
+        context = {
+            'mode': 0,
+            'message': 'Перейти к списку со всеми ситхами',
+            'list': sith_list
+        }
+    else:
+        context = {
+            'mode': 1,
+            'message': 'Перейти к списку где нет ситхов без своих рук тени',
+            'list': sith_list
+        }
+    return render(request, "app/bonus.html", context)
