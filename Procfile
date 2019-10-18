@@ -1,1 +1,1 @@
-web: gunicorn test_bars.wsgi --log-file -
+web: gunicorn test_bars.wsgi
