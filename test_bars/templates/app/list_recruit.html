@@ -1,0 +1,20 @@
+{% extends "general/../general/base.html" %}
+{% block title %} Список ситхов {% endblock %}
+{% load static %}
+{% block content %}
+    <h1>Список ситхов</h1>
+    {% for item in list %}
+        <div class="item some_margin">
+        <h3 class="some_margin">{{item.recruit.name}}</h3>
+        {% for answer in item.answer %}
+            <h4 class="some_margin">{{ answer.question.name }} --- {{ answer.answer }}</h4>
+        {% endfor %}
+
+            <a href="/app/recruit?sith_id={{ sith_id }}&recruit_id={{ item.recruit.id }}">
+                <div class="sith_item item_hover">
+                    Завербовать
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+{% endblock content %}>

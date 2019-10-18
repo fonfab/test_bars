@@ -1,0 +1,13 @@
+{% extends "general/../general/base.html" %}
+{% block title %} Список ситхов {% endblock %}
+{% load static %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <div class="item some_margin">
+        <h3 class="some_margin">{{ msg }}</h3>
+        <a href="/app/list_recruit?sith_id={{ sith_id }}">
+            <div class="sith_item item_hover">К списку рекрутов</div>
+        </a>
+    </div>
+
+{% endblock content %}>

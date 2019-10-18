@@ -1,0 +1,11 @@
+{% extends "general/../general/base.html" %}
+{% block title %} Список ситхов {% endblock %}
+{% load static %}
+{% block content %}
+    <h1>Список ситхов</h1>
+    {% for item in list %}
+        <a href="/app/list_recruit?sith_id={{ item.id }}">
+            <div class="item sith_item item_hover">{{item.name}}</div>
+        </a>
+    {% endfor %}
+{% endblock content %}>
