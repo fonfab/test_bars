@@ -21,7 +21,7 @@ from test_bars import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('app.urls')),
-    url(r'^main', views.get_main_page, name='main'),
-    url(r'^', views.error_page, name='error'),
+    url(r'^', views.get_main_page, name='main'),
+    # url(r'^', views.error_page, name='error'),
 
 ]
