@@ -4,8 +4,8 @@
 {% block content %}
     <h1>Список ситхов</h1>
     {% for item in list %}
-        <a href="">
-            <div class="sith_item">{{item.name}}</div>
+        <a href="/app/list_recruit?sith_id={{ item.id }}">
+            <div class="item sith_item">{{item.name}}</div>
         </a>
     {% endfor %}
 {% endblock content %}>

@@ -44,3 +44,16 @@ def get_sith_list(request):
         'list': models.Sith.objects.all()
     }
     return render(request, "app/list_sith.html", context)
+
+
+def get_recruit_list(request):
+    recruit_answer = [{'recruit': item, 'answer': models.QuestionAsk.objects.filter(recruit=item)}
+                      for item in models.Recruit.objects.filter(is_shadow_hands=False).all()]
+
+    print(recruit_answer)
+
+    context = {
+        'sith_id': request.GET.get('sith_id', ''),
+        'list': recruit_answer
+    }
+    return render(request, "app/list_recruit.html", context)
