@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from app import forms
 from app import models
 
-# Create your views here.
-
 
 def get_recruit_form(request):
     recruit = ''
@@ -14,7 +12,7 @@ def get_recruit_form(request):
             recruit = form.save()
 
         request.session.update({'rec_id': recruit.id})
-        print(request.session.__dict__)
+        # print(request.session.__dict__)
 
         return redirect("recruit_test")
     else:
@@ -32,10 +30,17 @@ def get_recruit_test(request):
 
         return redirect('main')
     else:
-        print(request.GET)
+        # print(request.GET)
 
         context = {
             'list': models.TestTrials.objects.get(id_order=1).questions.all()
         }
-        print()
+        # print()
         return render(request, 'app/test.html', context)
+
+
+def get_sith_list(request):
+    context = {
+        'list': models.Sith.objects.all()
+    }
+    return render(request, "app/list_sith.html", context)
