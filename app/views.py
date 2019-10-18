@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 from app import forms
 from app import models
 
@@ -48,12 +49,54 @@ def get_sith_list(request):
 
 def get_recruit_list(request):
     recruit_answer = [{'recruit': item, 'answer': models.QuestionAsk.objects.filter(recruit=item)}
-                      for item in models.Recruit.objects.filter(is_shadow_hands=False).all()]
-
-    print(recruit_answer)
+                      for item in models.Recruit.objects.filter(shadow_hands__isnull=True).all()]
 
     context = {
         'sith_id': request.GET.get('sith_id', ''),
         'list': recruit_answer
     }
     return render(request, "app/list_recruit.html", context)
+
+
+def set_recruit(request):
+    recruit_id = request.GET.get('recruit_id', '')
+    sith_id = request.GET.get('sith_id', '')
+    sith = models.Sith.objects.get(id=sith_id)
+
+    if models.Recruit.objects.filter(id=recruit_id, shadow_hands=sith).exists():
+        context = {
+            'title': 'Ошибка',
+            'msg': 'Данный пользователь уже завербован',
+            'sith_id': sith_id,
+        }
+        return render(request, 'app/message.html', context)
+
+    if len(models.Recruit.objects.filter(shadow_hands=sith)) > 3:
+        context = {
+            'title': 'Ошибка',
+            'msg': 'У вас уже набрали достаточное количество рекрутов',
+            'sith_id': sith_id,
+        }
+        return render(request, 'app/message.html', context)
+
+    recruit = models.Recruit.objects.get(id=recruit_id)
+    recruit.shadow_hands = sith
+    recruit.save()
+
+    send_info_email()
+
+    context = {
+        'title': 'Удачно',
+        'msg': 'Данному рекруту направлено сообщение о вербовке',
+        'sith_id': sith_id,
+    }
+    return render(request, 'app/message.html', context)
+
+
+def send_info_email():
+    mail_from = 'info.services.kartli@gmail.com'
+    mail_to = ['fonfabular@gmail.com']
+    topic = 'Поздравляю вас завербовали'
+    msg = 'Поздравляю вас завербовали'
+
+    send_mail(topic, msg, mail_from, mail_to)

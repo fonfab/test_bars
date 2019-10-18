@@ -3,21 +3,6 @@ from app import models as mod
 # Create your models here.
 
 
-class Recruit(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Имя рекрутера')
-    planet = models.CharField(max_length=255, verbose_name='Планета обитания', default='null')
-    age = models.IntegerField(verbose_name='Возраст')
-    email = models.EmailField(verbose_name='Адресс электронной почты')
-    is_shadow_hands = models.BooleanField(verbose_name='Рука тени', default=False)
-
-    class Meta:
-        verbose_name = 'Рекрут'
-        verbose_name_plural = 'Рекруты'
-
-    def __str__(self):
-        return self.name
-
-
 class Sith(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя ситха')
     planet = models.CharField(max_length=255, verbose_name='Планета обитания', default='null')
@@ -25,6 +10,21 @@ class Sith(models.Model):
     class Meta:
         verbose_name = 'Ситх'
         verbose_name_plural = 'Ситхи'
+
+    def __str__(self):
+        return self.name
+
+
+class Recruit(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Имя рекрутера')
+    planet = models.CharField(max_length=255, verbose_name='Планета обитания', default='null')
+    age = models.IntegerField(verbose_name='Возраст')
+    email = models.EmailField(verbose_name='Адресс электронной почты')
+    shadow_hands = models.ForeignKey(mod.Sith,  on_delete=models.SET_NULL, null=True, verbose_name='Рука тени')
+
+    class Meta:
+        verbose_name = 'Рекрут'
+        verbose_name_plural = 'Рекруты'
 
     def __str__(self):
         return self.name

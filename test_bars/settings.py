@@ -123,3 +123,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'info.test.bars@gmail.com'
+EMAIL_HOST_PASSWORD = 'rngjzpeuayivzxok'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # email, с которого будет отправлено письмо
