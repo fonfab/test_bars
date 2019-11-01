@@ -130,7 +130,7 @@ STATICFILES_DIRS = [
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = 'info.test.bars@gmail.com'
-EMAIL_HOST_PASSWORD = 'rngjzpeuayivzxok'
+EMAIL_HOST_PASSWORD = '******************'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 SERVER_EMAIL = EMAIL_HOST_USER

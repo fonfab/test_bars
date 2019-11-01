@@ -3,9 +3,9 @@
 {% load static %}
 {% block content %}
     <h1>Тестирование</h1>
-    <form action="" method="post">
+    <form action="/app/recruit_test" method="post">
         {% csrf_token %}
-        <input type="hidden" name="recruit_id" value="aI2bEJ94EX5ddPrdESwJQOitBq5cDliYNqJMavpKINdODnCtgVmj6842kIxuQic5">
+        <input type="hidden" name="recruit_id" value="{{recruit_id}}">
         {% for item in list %}
             <p>
                 <label for="{{ item.id }}">{{item.name}}</label>
